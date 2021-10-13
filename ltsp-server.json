@@ -8,15 +8,15 @@
         "<enter><wait>"
       ],
       "boot_wait": "3s",
-      "http_directory": "subiquity/http",
+      "http_directory": "subiquity/ltsp",
       "iso_checksum": "sha256:f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98",
       "iso_urls": [
-        "iso/ubuntu-20.04.3-live-server-amd64.iso",
+        "ubuntu-20.04.3-live-server-amd64.iso",
         "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
       ],
       "memory": 1024,
-      "name": "ubuntu-20.04-live-server",
-      "output_directory": "output/live-server",
+      "name": "ltsp-server",
+      "output_directory": "output/ltsp-server",
       "shutdown_command": "shutdown -P now",
       "ssh_handshake_attempts": "20",
       "ssh_password": "ubuntu",
@@ -27,7 +27,7 @@
       "qemuargs": [
         [
           "-drive",
-          "file=output/live-server/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=qcow2,index=1"
+          "file=output/ltsp-server/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=qcow2,index=1"
         ]
       ],
       "vnc_port_max": 5980,

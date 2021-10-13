@@ -1,0 +1,46 @@
+{
+  "builders": [
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<enter><wait><enter><wait><f6><wait><esc><wait> ",
+        "autoinstall ds=nocloud-net;seedfrom=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
+        "<enter><wait>"
+      ],
+      "boot_wait": "3s",
+      "http_directory": "subiquity/http",
+      "iso_checksum": "sha256:f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98",
+      "iso_urls": [
+        "ubuntu-20.04.3-live-server-amd64.iso",
+        "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
+      ],
+      "memory": 1024,
+      "name": "client",
+      "output_directory": "output/client",
+      "shutdown_command": "shutdown -P now",
+      "ssh_handshake_attempts": "20",
+      "ssh_password": "ubuntu",
+      "ssh_pty": true,
+      "ssh_timeout": "20m",
+      "ssh_username": "ubuntu",
+      "type": "qemu",
+      "qemuargs": [
+        [
+          "-drive",
+          "file=output/live-server/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=qcow2,index=1"
+        ]
+      ],
+      "vnc_port_max": 5980,
+      "vnc_port_min": 5900
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "ls /"
+      ],
+      "type": "shell"
+    }
+  ]
+}
+
