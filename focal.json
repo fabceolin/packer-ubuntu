@@ -1,0 +1,77 @@
+{
+  "builders": [
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<esc>",
+        "net_dhcp",
+        "<enter>",
+        "net_ipv6_autoconf",
+        "<enter>",
+        "net_ls_addr",
+        "<enter>",
+        "insmod http",
+        "<enter>",
+        "echo $root",
+        "<enter>",
+        "chainloader (http,archive.ubuntu.com)/ubuntu/dists/focal/main/uefi/grub2-amd64/current/grubnetx64.efi.signed",
+        "<enter>",
+        "boot",
+        "<enter>",
+        "<wait5s>",
+        "<esc>",
+        "net_bootp",
+        "<enter>",
+        "net_ipv6_autoconf",
+        "<enter>",
+        "set root=cd0",
+        "<enter>",
+        "insmod (cd0)/boot/grub/x86_64-efi/http.mod",
+        "<enter>",
+        "chainloader (http,boot.netboot.xyz)/ipxe/netboot.xyz.efi",
+        "<enter>",
+        "boot",
+        "<enter>"
+      ],
+      "boot_wait": "5s",
+      "http_directory": "subiquity/ltsp",
+      "iso_checksum": "sha256:f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98",
+      "iso_urls": [
+        "ubuntu-20.04.3-live-server-amd64.iso",
+        "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
+      ],
+      "memory": 1024,
+      "name": "focal",
+      "output_directory": "output/focal",
+      "shutdown_command": "shutdown -P now",
+      "ssh_handshake_attempts": "20",
+      "ssh_password": "ubuntu",
+      "ssh_pty": true,
+      "ssh_timeout": "20m",
+      "ssh_username": "ubuntu",
+      "type": "qemu",
+      "qemuargs": [
+        [
+          "-drive",
+          "file=output/focal/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=qcow2,index=1"],
+          [ "-bios",
+            "/usr/share/qemu/OVMF.fd" 
+          ],
+          [ "-vga", 
+            "virtio"
+          ]
+      ],
+      "vnc_port_max": 5980,
+      "vnc_port_min": 5900
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "ls /"
+      ],
+      "type": "shell"
+    }
+  ]
+}
+

@@ -1,0 +1,76 @@
+{
+  "builders": [
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<esc>",
+        "net_dhcp",
+        "<enter>",
+        "net_ipv6_autoconf",
+        "<enter>",
+        "net_ls_addr",
+        "<enter>",
+        "insmod http",
+        "<enter>",
+        "echo $root",
+        "<enter>",
+        "chainloader (http,archive.ubuntu.com)/ubuntu/dists/bionic/main/uefi/grub2-amd64/current/grubnetx64.efi.signed",
+        "<enter>",
+        "boot",
+        "<enter>",
+        "<wait5s>",
+        "<esc>",
+        "net_bootp",
+        "<enter>",
+        "net_ipv6_autoconf",
+        "<enter>",
+        "set root=cd0",
+        "<enter>",
+        "insmod (cd0)/b3oot/grub/x86_64-efi/http.mod",
+        "<enter>",
+        "chainloader (http,boot.netboot.xyz)/ipxe/netboot.xyz.efi",
+        "<enter>",
+        "boot",
+        "<enter>"
+      ],
+      "boot_wait": "5s",
+      "http_directory": "subiquity/ltsp",
+      "iso_checksum": "sha256:6c647b1ab4318e8c560d5748f908e108be654bad1e165f7cf4f3c1fc43995934",
+      "iso_urls": [
+        "ubuntu-18.04.6-live-server-amd64.iso",
+        "https://releases.ubuntu.com/18.04/ubuntu-18.04.6-live-server-amd64.iso"
+      ],
+      "memory": 1024,
+      "name": "bionic",
+      "output_directory": "output/bionic",
+      "shutdown_command": "shutdown -P now",
+      "ssh_handshake_attempts": "20",
+      "ssh_password": "ubuntu",
+      "ssh_pty": true,
+      "ssh_timeout": "20m",
+      "ssh_username": "ubuntu",
+      "type": "qemu",
+      "qemuargs": [
+          [ "-drive" , "if=virtio,file=netboot.xyz.iso,media=cdrom,index=4" ],
+          [ "-drive" , "if=virtio,file=bionic.iso,media=cdrom,index=3" ],
+          [ "-bios",
+            "/usr/share/qemu/OVMF.fd" 
+          ],
+          [ "-vga", 
+            "virtio"
+          ]
+      ],
+      "vnc_port_max": 5980,
+      "vnc_port_min": 5900
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "ls /"
+      ],
+      "type": "shell"
+    }
+  ]
+}
+
