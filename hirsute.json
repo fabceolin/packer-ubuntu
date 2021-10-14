@@ -16,14 +16,14 @@
       ],
       "boot_wait": "5s",
       "http_directory": "subiquity/ltsp",
-      "iso_checksum": "sha256:f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98",
+      "iso_checksum": "sha256:e4089c47104375b59951bad6c7b3ee5d9f6d80bfac4597e43a716bb8f5c1f3b0",
       "iso_urls": [
-        "ubuntu-20.04.3-live-server-amd64.iso",
-        "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
+        "ubuntu-21.04-live-server-amd64.iso",
+        "http://www.releases.ubuntu.com/21.04/ubuntu-21.04-live-server-amd64.iso"
       ],
       "memory": 1024,
-      "name": "focal",
-      "output_directory": "output/focal",
+      "name": "hirsute",
+      "output_directory": "output/hirsute",
       "shutdown_command": "shutdown -P now",
       "ssh_handshake_attempts": "20",
       "ssh_password": "ubuntu",
@@ -33,7 +33,7 @@
       "type": "qemu",
       "qemuargs": [
           [ "-drive" , "if=virtio,file=netboot.xyz.img,media=disk,index=4" ],
-          [ "-drive" , "if=virtio,file=focal.iso,media=cdrom,index=3" ],
+          [ "-drive" , "if=virtio,file=hirsute.iso,media=cdrom,index=3" ],
           [ "-bios",
             "/usr/share/qemu/OVMF.fd" 
           ],

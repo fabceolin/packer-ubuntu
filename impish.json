@@ -22,8 +22,8 @@
         "https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
       ],
       "memory": 1024,
-      "name": "focal",
-      "output_directory": "output/focal",
+      "name": "impish",
+      "output_directory": "output/impish",
       "shutdown_command": "shutdown -P now",
       "ssh_handshake_attempts": "20",
       "ssh_password": "ubuntu",
@@ -33,7 +33,7 @@
       "type": "qemu",
       "qemuargs": [
           [ "-drive" , "if=virtio,file=netboot.xyz.img,media=disk,index=4" ],
-          [ "-drive" , "if=virtio,file=focal.iso,media=cdrom,index=3" ],
+          [ "-drive" , "if=virtio,file=impish.iso,media=cdrom,index=3" ],
           [ "-bios",
             "/usr/share/qemu/OVMF.fd" 
           ],

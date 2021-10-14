@@ -4,6 +4,7 @@
       "accelerator": "kvm",
       "boot_command": [
         "<esc>",
+
         "chainloader (hd1)/srv/tftp/boot/grub/x86_64_e/shimx64.efi",
         "<enter>",
         "boot",
